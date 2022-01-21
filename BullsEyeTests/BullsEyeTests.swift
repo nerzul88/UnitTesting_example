@@ -65,4 +65,20 @@ class BullsEyeTests: XCTestCase {
     XCTAssertEqual(sut.scoreRound, 95, "Score computed from guess is wrong")
   }
   
+  //тест производительности
+  func testScoreIsComputedPerformance() {
+    measure(metrics: [
+      //измеряет сколько времени прошло
+      XCTClockMetric(),
+      //отслеживает активность CPU, включая время CPU, циклы и количество инструкций
+      XCTCPUMetric(),
+      //сообщает вам, сколько данных тестируемый код записывает в хранилище
+      XCTStorageMetric(),
+      //отслеживает объем используемой физической памяти
+      XCTMemoryMetric()
+    ]) {
+      sut.check(guess: 100)
+    }
+  }
+  
 }
